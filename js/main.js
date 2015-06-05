@@ -13,30 +13,15 @@ var game = {
 };
 
 var net = require('net');
-//var parsePackets = require('../server/libs/parsepackets.js');
-var framemaker = require('../server/libs/parseframes.js');
-var enums = require('../server/libs/enums.js');
-var recieveSTOC = require('../server/libs/recieveSTOC.js');
+var parsePackets = require('./server/libs/parsepackets.js');
+var framemaker = require('./server/libs/parseframes.js');
+var enums = require('./server/libs/enums.js');
+var recieveSTOC = require('./server/libs/recieveSTOC.js');
 var proxy = net.createServer(function () {}).listen(8914);
-
-//proxy.on('connection', function (socket) {
-//
-//    var connection = net.connect(8911, '91.250.87.52');
-//    connection.on('data', function (data) {
-//        socket.write(data);
-//        var task = parsePackets('STOC', data);
-//        processTask(task, socket);
-//    });
-//    socket.on('data', function (data) {
-//        connection.write(data);
-//    });
-//    connection.on('error', function () {});
-//    socket.on('error', function () {});
-//});
 
 proxy.on('connection', function (socket) {
     var framer = new framemaker();
-    var connection = net.connect(8911, '91.250.87.52');
+    var connection = net.connect(8911, '192.99.11.19');
 
     connection.on('data', function (data) {
         //console.log(data)
